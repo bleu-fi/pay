@@ -26,6 +26,17 @@ module Pay
       autoload :SubscriptionRenewing, "pay/stripe/webhooks/subscription_renewing"
       autoload :SubscriptionUpdated, "pay/stripe/webhooks/subscription_updated"
       autoload :SubscriptionTrialWillEnd, "pay/stripe/webhooks/subscription_trial_will_end"
+      autoload :InvoiceCreated, "pay/stripe/webhooks/invoice_created"
+      autoload :InvoiceDeleted, "pay/stripe/webhooks/invoice_deleted"
+      autoload :InvoiceFinalizationFailed, "pay/stripe/webhooks/invoice_finalization_failed"
+      autoload :InvoiceFinalized, "pay/stripe/webhooks/invoice_finalized"
+      autoload :InvoiceOverdue, "pay/stripe/webhooks/invoice_overdue"
+      autoload :InvoicePaid, "pay/stripe/webhooks/invoice_paid"
+      autoload :InvoicePaymentSucceeded, "pay/stripe/webhooks/invoice_payment_succeeded"
+      autoload :InvoiceUpcoming, "pay/stripe/webhooks/invoice_upcoming"
+      autoload :InvoiceUpdated, "pay/stripe/webhooks/invoice_updated"
+      autoload :InvoiceVoided, "pay/stripe/webhooks/invoice_voided"
+      autoload :InvoiceWillBeDue, "pay/stripe/webhooks/invoice_will_be_due"
     end
 
     extend Env
