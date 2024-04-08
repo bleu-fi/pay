@@ -4,6 +4,7 @@ module Pay
     has_many :charges, dependent: :destroy
     has_many :subscriptions, dependent: :destroy
     has_many :payment_methods, dependent: :destroy
+    has_many :invoices, dependent: :destroy
     has_one :default_payment_method, -> { where(default: true) }, class_name: "Pay::PaymentMethod"
 
     scope :active, -> { where(deleted_at: nil) }
