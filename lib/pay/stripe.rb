@@ -6,6 +6,7 @@ module Pay
     autoload :Merchant, "pay/stripe/merchant"
     autoload :PaymentMethod, "pay/stripe/payment_method"
     autoload :Subscription, "pay/stripe/subscription"
+    autoload :Invoice, "pay/stripe/invoice"
 
     module Webhooks
       autoload :AccountUpdated, "pay/stripe/webhooks/account_updated"
