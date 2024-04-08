@@ -79,7 +79,7 @@ module Pay
           expand: [
             "customer",
             "lines",
-            "charges",
+            "charge",
             "subscription.plan",
           ]
         }
