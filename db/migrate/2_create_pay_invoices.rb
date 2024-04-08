@@ -14,9 +14,6 @@ class CreatePayInvoices < ActiveRecord::Migration[6.0]
       t.integer :total
       t.datetime :period_start
       t.datetime :period_end
-      t.public_send Pay::Adapter.json_column_type, :line_items
-
-      t.string :invoice_pdf_url
       t.string :stripe_account
       t.public_send Pay::Adapter.json_column_type, :data
 

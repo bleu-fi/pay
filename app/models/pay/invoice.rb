@@ -10,7 +10,6 @@ module Pay
     scope :with_deleted_customer, -> { joins(:customer).merge(Customer.deleted) }
 
     # Validations
-    validates :amount_due, presence: true
     validates :processor_id, presence: true, uniqueness: {scope: :customer_id, case_sensitive: true}
 
     # Store the invoice specific data
@@ -18,6 +17,7 @@ module Pay
     store_accessor :data, :hosted_invoice_url
 
     # Additional invoice attributes
+    store_accessor :data, :processor_plan_id
     store_accessor :data, :currency
     store_accessor :data, :line_items
     store_accessor :data, :subtotal # subtotal amount in cents

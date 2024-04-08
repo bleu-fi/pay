@@ -26,7 +26,7 @@ module Pay
       end
 
       def self.sync(invoice_id, object: nil, stripe_account: nil, try: 0, retries: 1)
-        object ||= ::Stripe::Invoice.retrieve({id: invoice_id, expand: ["customer", "lines", "charge"]})
+        object ||= ::Stripe::Invoice.retrieve({id: invoice_id}.merge(expand_options))
 
         pay_customer = Pay::Customer.find_by(processor: :stripe, processor_id: object.customer)
         if pay_customer.blank?
@@ -35,7 +35,7 @@ module Pay
         end
 
         attrs = {
-          subscription: pay_customer.subscriptions.find_by(processor_id: object.subscription&.id),
+          subscription: pay_customer.subscriptions.find_by(processor_id: object.subscription),
           amount_due: object.amount_due,
           currency: object.currency,
           status: object.status,
@@ -43,6 +43,7 @@ module Pay
           paid_at: object.status == 'paid' ? Time.now : nil,
           invoice_pdf_url: object.invoice_pdf,
           hosted_invoice_url: object.hosted_invoice_url,
+          processor_plan_id: object.subscription&.plan&.id,
           number: object.number,
           total: object.total,
           period_start: Time.at(object.lines.data.first.period.start),
@@ -79,7 +80,7 @@ module Pay
             "customer",
             "lines",
             "charges",
-            "subscription",
+            "subscription.plan",
           ]
         }
       end
