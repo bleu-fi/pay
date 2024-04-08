@@ -46,8 +46,8 @@ module Pay
           processor_plan_id: object.subscription&.plan&.id,
           number: object.number,
           total: object.total,
-          period_start: Time.at(object.lines.data.first.period.start),
-          period_end: Time.at(object.lines.data.first.period.end),
+          period_start: object.lines.data.first&.period&.start ? Time.at(object.lines.data.first.period.start) : nil,
+          period_end: object.lines.data.first&.period&.end ? Time.at(object.lines.data.first.period.end) : nil,
           line_items: object.lines.data.map do |line_item|
             {
               id: line_item.id,
