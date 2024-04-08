@@ -79,13 +79,7 @@ module Pay
         # Warn user of upcoming charges for their subscription. This is handy for
         # notifying annual users their subscription will renew shortly.
         # This probably should be ignored for monthly subscriptions.
-        events.subscribe "stripe.invoice.upcoming", Pay::Stripe::Webhooks::SubscriptionRenewing.new
-
-        # Payment action is required to process an invoice
-        events.subscribe "stripe.invoice.payment_action_required", Pay::Stripe::Webhooks::PaymentActionRequired.new
-
-        # If an invoice payment fails, we want to notify the user via email to update their payment details
-        events.subscribe "stripe.invoice.payment_failed", Pay::Stripe::Webhooks::PaymentFailed.new
+        
 
         # If a subscription is manually created on Stripe, we want to sync
         events.subscribe "stripe.customer.subscription.created", Pay::Stripe::Webhooks::SubscriptionCreated.new
@@ -117,6 +111,28 @@ module Pay
         # Handle subscriptions in Stripe Checkout Sessions
         events.subscribe "stripe.checkout.session.completed", Pay::Stripe::Webhooks::CheckoutSessionCompleted.new
         events.subscribe "stripe.checkout.session.async_payment_succeeded", Pay::Stripe::Webhooks::CheckoutSessionAsyncPaymentSucceeded.new
+
+        events.subscribe "stripe.invoice.upcoming", Pay::Stripe::Webhooks::SubscriptionRenewing.new
+        # Payment action is required to process an invoice
+        events.subscribe "stripe.invoice.payment_action_required", Pay::Stripe::Webhooks::PaymentActionRequired.new
+        # If an invoice payment fails, we want to notify the user via email to update their payment details
+        events.subscribe "stripe.invoice.payment_failed", Pay::Stripe::Webhooks::PaymentFailed.new
+
+        events.subscribe "stripe.invoice.created", Pay::Stripe::Webhooks::InvoiceCreated.new
+        events.subscribe "stripe.invoice.deleted", Pay::Stripe::Webhooks::InvoiceDeleted.new
+        events.subscribe "stripe.invoice.finalization_failed", Pay::Stripe::Webhooks::InvoiceFinalizationFailed.new
+        events.subscribe "stripe.invoice.finalized", Pay::Stripe::Webhooks::InvoiceFinalized.new
+        events.subscribe "stripe.invoice.overdue", Pay::Stripe::Webhooks::InvoiceOverdue.new
+        events.subscribe "stripe.invoice.paid", Pay::Stripe::Webhooks::InvoicePaid.new
+        events.subscribe "stripe.invoice.payment_succeeded", Pay::Stripe::Webhooks::InvoicePaymentSucceeded.new
+        events.subscribe "stripe.invoice.upcoming", Pay::Stripe::Webhooks::InvoiceUpcoming.new
+        events.subscribe "stripe.invoice.updated", Pay::Stripe::Webhooks::InvoiceUpdated.new
+        events.subscribe "stripe.invoice.voided", Pay::Stripe::Webhooks::InvoiceVoided.new
+        events.subscribe "stripe.invoice.will_be_due", Pay::Stripe::Webhooks::InvoiceWillBeDue.new
+        # events.subscribe "stripe.invoice.marked_uncollectible", 
+        # events.subscribe "stripe.invoice.payment_action_required", 
+        # events.subscribe "stripe.invoice.payment_failed", 
+        # events.subscribe "stripe.invoice.sent", Pay::Stripe::Webhooks::InvoiceSent.new
       end
     end
 
