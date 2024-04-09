@@ -137,7 +137,8 @@ module Pay
         events.subscribe "stripe.invoice.overdue", Pay::Stripe::Webhooks::InvoiceOverdue.new
         events.subscribe "stripe.invoice.paid", Pay::Stripe::Webhooks::InvoicePaid.new
         events.subscribe "stripe.invoice.payment_succeeded", Pay::Stripe::Webhooks::InvoicePaymentSucceeded.new
-        events.subscribe "stripe.invoice.upcoming", Pay::Stripe::Webhooks::InvoiceUpcoming.new
+        # UPCOMING HAS NO ID
+        # events.subscribe "stripe.invoice.upcoming", Pay::Stripe::Webhooks::InvoiceUpcoming.new
         events.subscribe "stripe.invoice.updated", Pay::Stripe::Webhooks::InvoiceUpdated.new
         events.subscribe "stripe.invoice.voided", Pay::Stripe::Webhooks::InvoiceVoided.new
         events.subscribe "stripe.invoice.will_be_due", Pay::Stripe::Webhooks::InvoiceWillBeDue.new
