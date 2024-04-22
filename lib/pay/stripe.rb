@@ -143,8 +143,6 @@ module Pay
         events.subscribe "stripe.invoice.voided", Pay::Stripe::Webhooks::InvoiceVoided.new
         events.subscribe "stripe.invoice.will_be_due", Pay::Stripe::Webhooks::InvoiceWillBeDue.new
         # events.subscribe "stripe.invoice.marked_uncollectible", 
-        # events.subscribe "stripe.invoice.payment_action_required", 
-        # events.subscribe "stripe.invoice.payment_failed", 
         # events.subscribe "stripe.invoice.sent", Pay::Stripe::Webhooks::InvoiceSent.new
       end
     end

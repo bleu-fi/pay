@@ -31,7 +31,7 @@ module Pay
     delegate_missing_to :pay_processor
 
     # Helpers for payment processors
-    %w[braintree stripe paddle_billing paddle_classic fake_processor].each do |processor_name|
+    %w[stripe].each do |processor_name|
       define_method :"#{processor_name}?" do
         customer.processor == processor_name
       end
