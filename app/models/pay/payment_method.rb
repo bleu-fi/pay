@@ -22,7 +22,7 @@ module Pay
     end
 
     def self.pay_processor_for(name)
-      "Pay::#{name.to_s.classify}::PaymentMethod".constantize
+      "Pay::#{name.to_s.camelize}::PaymentMethod".constantize
     end
 
     def payment_processor

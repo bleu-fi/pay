@@ -35,7 +35,7 @@ module Pay
     end
 
     def self.pay_processor_for(name)
-      "Pay::#{name.to_s.classify}::Billable".constantize
+      "Pay::#{name.to_s.camelize}::Billable".constantize
     end
 
     def pay_processor

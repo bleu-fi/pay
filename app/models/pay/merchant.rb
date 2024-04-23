@@ -9,7 +9,7 @@ module Pay
     delegate_missing_to :pay_processor
 
     def self.pay_processor_for(name)
-      "Pay::#{name.to_s.classify}::Merchant".constantize
+      "Pay::#{name.to_s.camelize}::Merchant".constantize
     end
 
     def pay_processor
