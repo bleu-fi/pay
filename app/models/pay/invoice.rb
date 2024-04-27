@@ -1,5 +1,7 @@
 module Pay
   class Invoice < Pay::ApplicationRecord
+    STATUSES = %w[draft open paid void uncollectible past_due refunded refunding disputed]
+
     # Associations
     belongs_to :customer
     belongs_to :subscription, optional: true
@@ -43,8 +45,9 @@ module Pay
       "Pay::#{name.to_s.camelize}::Invoice".constantize
     end
 
-    def payment_processor
-      @payment_processor ||= self.class.pay_processor_for(customer.processor).new(self)
+    def pay_processor
+      return if customer.processor.blank?
+      @pay_processor ||= self.class.pay_processor_for(customer.processor).new(self)
     end
 
     def sync!(**options)
