@@ -46,7 +46,7 @@ module Pay
     end
 
     def pay_processor
-      return if customer.processor.blank?
+      return if customer&.processor.blank?
       @pay_processor ||= self.class.pay_processor_for(customer.processor).new(self)
     end
 
