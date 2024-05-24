@@ -40,7 +40,7 @@ module Pay
           currency: object.currency,
           status: object.status,
           due_date: object.due_date ? Time.at(object.due_date) : nil,
-          paid_at: object.status == 'paid' ? Time.now : nil,
+          paid_at: object.status == "paid" ? object.status_transitions&.paid_at ? Time.at(object.status_transitions.paid_at) : Time.at(object.created) : nil,
           invoice_pdf_url: object.invoice_pdf,
           hosted_invoice_url: object.hosted_invoice_url,
           processor_plan_id: object.subscription&.plan&.id,
